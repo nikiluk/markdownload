@@ -44,7 +44,9 @@ function turndown(content, options) {
           const localSrc = options.imageStyle === 'obsidian-nofolder'
             ? imageFilename.substring(imageFilename.lastIndexOf('/') + 1)
             : imageFilename.split('/').map(s => obsidianLink ? s : encodeURI(s)).join('/')
-          node.setAttribute('src', localSrc);
+          //removing the parent folder from the src URL 
+          let localSrcFinal = localSrc.replace(options.mdClipsFolder + "/", "");
+          node.setAttribute('src', localSrcFinal);
           return obsidianLink;
         }
         return false;
